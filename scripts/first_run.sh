@@ -78,7 +78,7 @@ if test "%PI_MAILGUN_API_KEY%" && test "%PI_MAILGUN_DOMAIN%" && test "%PI_EMAIL_
     -F text="New %PI_USERNAME%@${PI_CONFIG_HOSTNAME} setup on: ${PI_IP_ADDRESS}"
 fi
 
-apt-get install -y mlocate supervisor transmission-daemon
+apt-get install -y mlocate supervisor transmission-daemon htop zsh
 
 systemctl stop transmission-daemon
 echo '{
