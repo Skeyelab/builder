@@ -68,94 +68,110 @@ if "%PI_INSTALL_DOCKER%" -eq "true"; then
   usermod -aG docker %PI_USERNAME%
 fi
 
-# Send email telling about this server
-if test "%PI_MAILGUN_API_KEY%" && test "%PI_MAILGUN_DOMAIN%" && test "%PI_EMAIL_ADDRESS%"; then
-  curl -s --user "api:%PI_MAILGUN_API_KEY%" \
-    https://api.mailgun.net/v3/%PI_MAILGUN_DOMAIN%/messages \
-    -F from="%PI_USERNAME%@%PI_MAILGUN_DOMAIN%" \
-    -F to=%PI_EMAIL_ADDRESS% \
-    -F subject="New Raspberry Pi (${PI_CONFIG_HOSTNAME}) set up" \
-    -F text="New %PI_USERNAME%@${PI_CONFIG_HOSTNAME} setup on: ${PI_IP_ADDRESS}"
-fi
+# echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+# locale-gen
+# update-locale en_US.UTF-8
 
-# apt-get install -y mlocate supervisor transmission-daemon htop zsh
-# updatedb
+apt-get install -y mlocate supervisor transmission-daemon htop
+updatedb
 
-# systemctl stop transmission-daemon
-# echo '{
-#     "alt-speed-down": 50,
-#     "alt-speed-enabled": false,
-#     "alt-speed-time-begin": 540,
-#     "alt-speed-time-day": 127,
-#     "alt-speed-time-enabled": false,
-#     "alt-speed-time-end": 1020,
-#     "alt-speed-up": 50,
-#     "bind-address-ipv4": "0.0.0.0",
-#     "bind-address-ipv6": "::",
-#     "blocklist-enabled": true,
-#     "blocklist-url": "http://john.bitsurge.net/public/biglist.p2p.gz",
-#     "cache-size-mb": 4,
-#     "dht-enabled": true,
-#     "download-dir": "/var/lib/transmission-daemon/downloads",
-#     "download-limit": 100,
-#     "download-limit-enabled": 0,
-#     "download-queue-enabled": true,
-#     "download-queue-size": 2,
-#     "encryption": 2,
-#     "idle-seeding-limit": 30,
-#     "idle-seeding-limit-enabled": false,
-#     "incomplete-dir": "/var/lib/transmission-daemon/downloads",
-#     "incomplete-dir-enabled": false,
-#     "lpd-enabled": true,
-#     "max-peers-global": 200,
-#     "message-level": 1,
-#     "peer-congestion-algorithm": "",
-#     "peer-id-ttl-hours": 6,
-#     "peer-limit-global": 200,
-#     "peer-limit-per-torrent": 50,
-#     "peer-port": 51413,
-#     "peer-port-random-high": 65535,
-#     "peer-port-random-low": 49152,
-#     "peer-port-random-on-start": true,
-#     "peer-socket-tos": "default",
-#     "pex-enabled": true,
-#     "port-forwarding-enabled": true,
-#     "preallocation": 1,
-#     "prefetch-enabled": true,
-#     "queue-stalled-enabled": true,
-#     "queue-stalled-minutes": 30,
-#     "ratio-limit": 2,
-#     "ratio-limit-enabled": false,
-#     "rename-partial-files": true,
-#     "rpc-authentication-required": true,
-#     "rpc-bind-address": "0.0.0.0",
-#     "rpc-enabled": true,
-#     "rpc-host-whitelist": "",
-#     "rpc-host-whitelist-enabled": true,
-#     "rpc-password": "transmission",
-#     "rpc-port": 9091,
-#     "rpc-url": "/transmission/",
-#     "rpc-username": "transmission",
-#     "rpc-whitelist": "*.*.*.*",
-#     "rpc-whitelist-enabled": false,
-#     "scrape-paused-torrents-enabled": true,
-#     "script-torrent-done-enabled": false,
-#     "script-torrent-done-filename": "",
-#     "seed-queue-enabled": false,
-#     "seed-queue-size": 10,
-#     "speed-limit-down": 100,
-#     "speed-limit-down-enabled": false,
-#     "speed-limit-up": 100,
-#     "speed-limit-up-enabled": false,
-#     "start-added-torrents": true,
-#     "trash-original-torrent-files": false,
-#     "umask": 18,
-#     "upload-limit": 100,
-#     "upload-limit-enabled": 0,
-#     "upload-slots-per-torrent": 14,
-#     "utp-enabled": true
-# }' > /etc/transmission-daemon/settings.json
-# systemctl start transmission-daemon
+systemctl stop transmission-daemon
+echo '{
+    "alt-speed-down": 50,
+    "alt-speed-enabled": false,
+    "alt-speed-time-begin": 540,
+    "alt-speed-time-day": 127,
+    "alt-speed-time-enabled": false,
+    "alt-speed-time-end": 1020,
+    "alt-speed-up": 50,
+    "bind-address-ipv4": "0.0.0.0",
+    "bind-address-ipv6": "::",
+    "blocklist-enabled": true,
+    "blocklist-url": "http://john.bitsurge.net/public/biglist.p2p.gz",
+    "cache-size-mb": 4,
+    "dht-enabled": true,
+    "download-dir": "/var/lib/transmission-daemon/downloads",
+    "download-limit": 100,
+    "download-limit-enabled": 0,
+    "download-queue-enabled": true,
+    "download-queue-size": 2,
+    "encryption": 2,
+    "idle-seeding-limit": 30,
+    "idle-seeding-limit-enabled": false,
+    "incomplete-dir": "/var/lib/transmission-daemon/downloads",
+    "incomplete-dir-enabled": false,
+    "lpd-enabled": true,
+    "max-peers-global": 200,
+    "message-level": 1,
+    "peer-congestion-algorithm": "",
+    "peer-id-ttl-hours": 6,
+    "peer-limit-global": 200,
+    "peer-limit-per-torrent": 50,
+    "peer-port": 51413,
+    "peer-port-random-high": 65535,
+    "peer-port-random-low": 49152,
+    "peer-port-random-on-start": true,
+    "peer-socket-tos": "default",
+    "pex-enabled": true,
+    "port-forwarding-enabled": true,
+    "preallocation": 1,
+    "prefetch-enabled": true,
+    "queue-stalled-enabled": true,
+    "queue-stalled-minutes": 30,
+    "ratio-limit": 2,
+    "ratio-limit-enabled": false,
+    "rename-partial-files": true,
+    "rpc-authentication-required": true,
+    "rpc-bind-address": "0.0.0.0",
+    "rpc-enabled": true,
+    "rpc-host-whitelist": "",
+    "rpc-host-whitelist-enabled": true,
+    "rpc-password": "transmission",
+    "rpc-port": 9091,
+    "rpc-url": "/transmission/",
+    "rpc-username": "transmission",
+    "rpc-whitelist": "*.*.*.*",
+    "rpc-whitelist-enabled": false,
+    "scrape-paused-torrents-enabled": true,
+    "script-torrent-done-enabled": false,
+    "script-torrent-done-filename": "",
+    "seed-queue-enabled": false,
+    "seed-queue-size": 10,
+    "speed-limit-down": 100,
+    "speed-limit-down-enabled": false,
+    "speed-limit-up": 100,
+    "speed-limit-up-enabled": false,
+    "start-added-torrents": true,
+    "trash-original-torrent-files": true,
+    "umask": 18,
+    "upload-limit": 100,
+    "upload-limit-enabled": 0,
+    "upload-slots-per-torrent": 14,
+    "utp-enabled": true,
+    "watch-dir": "/var/lib/transmission-daemon/downloads",
+    "watch-dir-enabled": true
+}' > /etc/transmission-daemon/settings.json
+systemctl start transmission-daemon
+
+
+#samba
+# apt-get install samba samba-common-bin
+# cp -pf /etc/samba/smb.conf /etc/samba/smb.conf.bak
+# chmod -R 1777 /var/lib/transmission-daemon/downloads
+
+# echo '[Transmission Downloads]
+
+# path = /var/lib/transmission-daemon/downloads
+# browsable = yes
+# writable = yes
+# read only = no
+# force user = nobody
+# create mask = 0777
+# directory mask = 0777
+# Public = yes
+# Guest ok = yes' >> /etc/samba/smb.conf
+
+# service smbd restart
 
 #glances
 #curl -L https://bit.ly/glances | /bin/bash
@@ -173,11 +189,18 @@ fi
 
 # source $ZSH/oh-my-zsh.sh
 
-# ' > %PI_USERNAME%/.zshrc
+# ' > /home/%PI_USERNAME%/.zshrc
 
-# echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-# locale-gen
-# update-locale en_US.UTF-8
+
+# Send email telling about this server
+if test "%PI_MAILGUN_API_KEY%" && test "%PI_MAILGUN_DOMAIN%" && test "%PI_EMAIL_ADDRESS%"; then
+  curl -s --user "api:%PI_MAILGUN_API_KEY%" \
+    https://api.mailgun.net/v3/%PI_MAILGUN_DOMAIN%/messages \
+    -F from="%PI_USERNAME%@%PI_MAILGUN_DOMAIN%" \
+    -F to=%PI_EMAIL_ADDRESS% \
+    -F subject="New Raspberry Pi (${PI_CONFIG_HOSTNAME}) set up" \
+    -F text="New %PI_USERNAME%@${PI_CONFIG_HOSTNAME} setup on: ${PI_IP_ADDRESS}"
+fi
 
 rm -Rf ${DATA_DIR}
 
