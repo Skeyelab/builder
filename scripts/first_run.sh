@@ -79,9 +79,8 @@ if test "%PI_MAILGUN_API_KEY%" && test "%PI_MAILGUN_DOMAIN%" && test "%PI_EMAIL_
 fi
 
 apt-get install -y mlocate supervisor transmission-daemon
-updatedb
-systemctl stop transmission-daemon
 
+systemctl stop transmission-daemon
 echo '{
     "alt-speed-down": 50,
     "alt-speed-enabled": false,
@@ -155,11 +154,15 @@ echo '{
     "upload-slots-per-torrent": 14,
     "utp-enabled": true
 }' > /etc/transmission-daemon/settings.json
-
 systemctl start transmission-daemon
+
+curl -L https://bit.ly/glances | /bin/bash
 
 rm -Rf ${DATA_DIR}
 
 rm -- "$0"
 
 echo "Deleted current script"
+
+updatedb
+
