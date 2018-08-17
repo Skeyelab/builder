@@ -155,23 +155,23 @@ systemctl start transmission-daemon
 
 
 #samba
-# apt-get install samba samba-common-bin
-# cp -pf /etc/samba/smb.conf /etc/samba/smb.conf.bak
-# chmod -R 1777 /var/lib/transmission-daemon/downloads
+apt-get install -y samba samba-common-bin
+cp -pf /etc/samba/smb.conf /etc/samba/smb.conf.bak
+chmod -R 1777 /var/lib/transmission-daemon/downloads
 
-# echo '[Transmission Downloads]
+echo '[Transmission Downloads]
 
-# path = /var/lib/transmission-daemon/downloads
-# browsable = yes
-# writable = yes
-# read only = no
-# force user = nobody
-# create mask = 0777
-# directory mask = 0777
-# Public = yes
-# Guest ok = yes' >> /etc/samba/smb.conf
+path = /var/lib/transmission-daemon/downloads
+browsable = yes
+writable = yes
+read only = no
+force user = nobody
+create mask = 0777
+directory mask = 0777
+Public = yes
+Guest ok = yes' >> /etc/samba/smb.conf
 
-# service smbd restart
+service smbd restart
 
 #glances
 #curl -L https://bit.ly/glances | /bin/bash
