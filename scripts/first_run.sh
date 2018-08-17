@@ -156,7 +156,27 @@ echo '{
 }' > /etc/transmission-daemon/settings.json
 systemctl start transmission-daemon
 
-curl -L https://bit.ly/glances | /bin/bash
+#glances
+#curl -L https://bit.ly/glances | /bin/bash
+
+#Oh My Zsh
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# echo '
+# export ZSH=$HOME/.oh-my-zsh
+
+# # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# ZSH_THEME="robbyrussell"
+
+# plugins=(git sudo zsh-autosuggestions zsh-syntax-hilighting colorize color-man)
+
+# source $ZSH/oh-my-zsh.sh
+
+# ' > %PI_USERNAME%/.zshrc
+
+# echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+# locale-gen
+# update-locale en_US.UTF-8
 
 rm -Rf ${DATA_DIR}
 
